@@ -1,0 +1,12 @@
+{
+    "name": "giorgi/tbc-acquiring",
+    "description": "Tbc Acquiring gateway",
+    "authors": [
+        {
+            "name": "Giorgi Bibilashvili",
+            "email": "giorgi.bibilashvili89@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
