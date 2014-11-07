@@ -22,7 +22,9 @@ try{
 
 	 );
 
-	$response = $tbc->createOrder( $data );
+	$response = $tbc
+					->createOrder( $data )
+					->extractTransactionID();
 
 	?>
 	<html>
@@ -36,7 +38,7 @@ try{
 		</head>
 		<body onLoad='javascript:redirect()'>
 			<form name='returnform' action='https://securepay.ufc.ge/ecomm2/ClientHandler' method='POST'>
-			  <input type='text' size="50" name='trans_id' value='<?php echo trim( str_replace('TRANSACTION_ID:', '', $response) ) ?>'>
+			  <input type='text' size="50" name='trans_id' value='<?php echo $response ?>'>
 			 
 				<noscript>
 				    <center>Please click the submit button below.<br>
@@ -47,7 +49,14 @@ try{
 		</body>
 	</html>
 	<?php
+	
+
+
 }
 catch( Exception $e ){
 	header('Location: index.php?msg='.$e->getMessage());
 }
+
+
+
+
