@@ -11,15 +11,12 @@ class TbcGateway
 	private $gateway = 'https://securepay.ufc.ge:18443/ecomm2/MerchantHandler';
 	
 	/*
-	* Application Credentials
+	* Application SSL Credentials
 	*/
 
 	private $password = 'JKg78fgJHFkwq53gJH';
-	private $cert = 'E:\www\htdocs\TbcAcquiring\src\certs\cert1\file.crt_cleaned.pem';
-	private $key =  'E:\www\htdocs\TbcAcquiring\src\certs\cert1\file.key_cleaned.pem';
-
-	private $cert_from_http = 'http://localhost/TbcAcquiring/src/certs/cert1/file.crt_cleaned.pem';
-	private $key_from_http =  'http://localhost/TbcAcquiring/src/certs/cert1/file.key_cleaned.pem';
+	private $cert = 'E:\www\htdocs\TbcAcquiring\src\certs\cert1\file.crt.pem';
+	private $key =  'E:\www\htdocs\TbcAcquiring\src\certs\cert1\file.key.pem';
 
 	public function __construct(){
 
@@ -33,9 +30,8 @@ class TbcGateway
 		
 		$data = (array) $data;
 		$response = $this->_doRequest( $data );	
-
+		return $response;
 	}	
-	
 		
 	private function _doRequest( $request_array = null )
 	{ 
@@ -54,19 +50,14 @@ class TbcGateway
 	  curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
 	  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 	  curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-	  curl_setopt($curl, CURLOPT_SSLCERT, $this->cert);
-	  curl_setopt($curl, CURLOPT_SSLKEY,  $this->key) ;
+	  curl_setopt($curl, CURLOPT_SSLCERT, $this->cert );
+	  curl_setopt($curl, CURLOPT_SSLKEY,  $this->key ) ;
 	  curl_setopt($curl, CURLOPT_SSLKEYPASSWD, $this->password);
 	  curl_setopt($curl, CURLOPT_URL, $this->gateway);
 
 	  $result = curl_exec($curl);
 	  $info = curl_getinfo($curl);
-	  $error = curl_error($curl);
-	  
-	  echo '<pre>';
-	  print_r( $error );
-	  die;
-	 
+	  $error = curl_error($curl); 
 	  return $result;
 	}	
 	
